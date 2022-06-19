@@ -1,14 +1,14 @@
 package com.example.library.controller;
 
 import com.example.library.model.Book;
-import com.example.library.model.PostBookRequest;
-import com.example.library.model.PostBookResponse;
 import com.example.library.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,11 +28,8 @@ public class LibraryController {
     }
 
     @PostMapping("/books")
-    public ResponseEntity<Book> postBook(@RequestBody PostBookRequest request) {
-        if (request.getAuthor() == null) {
-            request.setAuthor("unknown");
-        }
-        if (request.getTitle() == null) {
+    public ResponseEntity<Book> postBook(@Valid @RequestBody Book request, Errors errors) {
+        if (errors.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
             return libService.postBook(request);

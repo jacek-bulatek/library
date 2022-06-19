@@ -1,6 +1,9 @@
 package com.example.library.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="books")
@@ -11,13 +14,14 @@ public class Book {
     @Column(name = "author")
     String author;
     @Column(name = "title")
+    @NotBlank(message = "Book needs a title")
     String title;
     @Column(name = "available")
     int available;
 
     public Book() {
-        this.author = "author";
-        this.title = "title";
+        this.author = "anonymous";
+        this.title = null;
     }
 
     public Book(String title, String author) {

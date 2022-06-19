@@ -1,8 +1,6 @@
 package com.example.library.service;
 
 import com.example.library.model.Book;
-import com.example.library.model.PostBookRequest;
-import com.example.library.model.PostBookResponse;
 import com.example.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +22,7 @@ public class LibraryService {
         return bookRepo.findById(id).get();
     }
 
-    public ResponseEntity<Book> postBook(PostBookRequest request) {
+    public ResponseEntity<Book> postBook(Book request) {
         Book entry = bookRepo.findByTitleAndAuthor(request.getTitle(), request.getAuthor());
         if (entry != null) {
             entry.setAvailable(entry.getAvailable() + 1);
