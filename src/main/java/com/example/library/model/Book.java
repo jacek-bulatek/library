@@ -1,7 +1,5 @@
 package com.example.library.model;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -14,7 +12,7 @@ public class Book {
     @Column(name = "author")
     String author;
     @Column(name = "title")
-    @NotBlank(message = "Book needs a title")
+    @NotBlank
     String title;
     @Column(name = "available")
     int available;
